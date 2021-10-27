@@ -2,7 +2,10 @@ package org.wit.marketplace.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import org.wit.marketplace.R
 import org.wit.marketplace.databinding.ActivityMarketplaceBinding
 import org.wit.marketplace.main.MainApp
 import org.wit.marketplace.models.MarketplaceModel
@@ -21,18 +24,19 @@ class MarketplaceActivity : AppCompatActivity() {
         binding = ActivityMarketplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbarAdd.title = title
+        setSupportActionBar(binding.toolbarAdd)
+
         app = application as MainApp
-        i("Marketplace Activity started..")
 
         binding.btnAdd.setOnClickListener() {
             marketItem.title = binding.itemTitle.text.toString()
             marketItem.description = binding.description.text.toString()
 
             if (marketItem.title.isNotEmpty()) {
-                app.marketItems.add((marketItem.copy()))
-                i("add Button Pressed: $marketItem")
-                for(i in app.marketItems.indices)
-                {i("Item[$i]:${this.app.marketItems[i]}")}
+                app.marketItems.create((marketItem.copy()))
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
@@ -40,5 +44,17 @@ class MarketplaceActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_marketplace, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> { finish() }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

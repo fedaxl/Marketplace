@@ -1,13 +1,15 @@
 package org.wit.marketplace.main
 
 import android.app.Application
+import org.wit.marketplace.models.MarketplaceMemStore
 import org.wit.marketplace.models.MarketplaceModel
 import timber.log.Timber
 import timber.log.Timber.i
 
 class MainApp : Application(){
 
-    val marketItems = ArrayList<MarketplaceModel>()
+    // val marketItems = MarketplaceMemStore()
+    val marketItems = MarketplaceMemStore()
 
     override fun onCreate() {
         super.onCreate()
