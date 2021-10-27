@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marketplace</string>
+    <string name="button_addItem">Add Item</string>
+    <string name="hint_itemTitle">Item Title</string>
 </resources>
