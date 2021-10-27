@@ -3,6 +3,7 @@ package org.wit.marketplace
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import timber.log.Timber
+import timber.log.Timber.i
 
 class MarketplaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,6 +11,6 @@ class MarketplaceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_marketplace)
 
         Timber.plant(Timber.DebugTree())
-        Timber.i("Marketplace Activity started..")
+        i("Marketplace Activity started..")
     }
 }
