@@ -11,13 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Marketplace">
         <activity
-            android:name=".activities.MarketplaceActivity"
+            android:name=".activities.MarketplaceListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.MarketplaceActivity">
         </activity>
     </application>
 
