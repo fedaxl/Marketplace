@@ -18,23 +18,22 @@ class MarketplaceMemStore : MarketplaceStore {
             return marketItems
         }
 
-
         override fun create(marketItem: MarketplaceModel) {
+            marketItem.id = getId()
             marketItems.add(marketItem)
             logAll()
         }
 
-        /*override fun update(marketItem: MarketplaceModel) {
-            var foundMarketItem = findOne(marketItem.id!!)
-            if (foundMarketItem != null) {
-                foundMarketItem.title = marketItem.title
-                foundMarketItem.description = marketItem.description
-            }
-        }*/
+        override fun update(marketItem: MarketplaceModel) {
+        var foundMarketItem: MarketplaceModel? = marketItems.find { p -> p.id == marketItem.id }
+        if (foundMarketItem != null) {
+            foundMarketItem.title = marketItem.title
+            foundMarketItem.description = marketItem.description
+            logAll()
+        }
+        }
 
-        fun logAll() {
+        private fun logAll() {
             marketItems.forEach { logger.info("${it}") }
         }
     }
-
-}

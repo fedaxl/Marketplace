@@ -29,6 +29,12 @@ class MarketplaceActivity : AppCompatActivity() {
 
         app = application as MainApp
 
+        if (intent.hasExtra("item_edit")) {
+            marketItem = intent.extras?.getParcelable("item_edit")!!
+            binding.itemTitle.setText(marketItem.title)
+            binding.description.setText(marketItem.description)
+        }
+
         binding.btnAdd.setOnClickListener() {
             marketItem.title = binding.itemTitle.text.toString()
             marketItem.description = binding.description.text.toString()

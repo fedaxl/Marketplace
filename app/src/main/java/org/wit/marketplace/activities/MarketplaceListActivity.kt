@@ -48,6 +48,7 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
 
     override fun onMarketplaceClick(marketItem: MarketplaceModel) {
         val launcherIntent = Intent(this, MarketplaceActivity::class.java)
+        launcherIntent.putExtra("item_edit", marketItem)
         startActivityForResult(launcherIntent,0)
     }
 }
