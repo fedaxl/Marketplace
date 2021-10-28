@@ -14,6 +14,7 @@ import org.wit.marketplace.R
 import org.wit.marketplace.databinding.ActivityMarketplaceBinding
 import org.wit.marketplace.helpers.showImagePicker
 import org.wit.marketplace.main.MainApp
+import org.wit.marketplace.models.Location
 import org.wit.marketplace.models.MarketplaceModel
 import timber.log.Timber.i
 
@@ -24,6 +25,8 @@ class MarketplaceActivity : AppCompatActivity() {
     lateinit var app : MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     val IMAGE_REQUEST = 1
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +60,7 @@ class MarketplaceActivity : AppCompatActivity() {
             marketItem.title = binding.itemTitle.text.toString()
             marketItem.description = binding.description.text.toString()
 
-            if (marketItem.title.isNotEmpty()) {
+            if (marketItem.title.isEmpty()) {
                 Snackbar.make(it, R.string.enter_item_title, Snackbar.LENGTH_LONG)
                     .show()
             } else {
@@ -74,7 +77,15 @@ class MarketplaceActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+
+        binding.itemLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapsActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,6 +113,23 @@ class MarketplaceActivity : AppCompatActivity() {
                                 .load(marketItem.image)
                                 .into(binding.itemImage)
                             binding.chooseImage.setText(R.string.change_item_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            i("Location == $location")
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
