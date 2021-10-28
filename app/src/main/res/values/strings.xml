@@ -4,7 +4,7 @@
     <string name="hint_itemTitle">Item Title</string>
     <string name="hint_itemDescription">Description </string>
     <string name="menu_addItem">Add</string>
-    <string name="menu_removeItem">Remove</string>
+    <string name="menu_deleteItem">Delete</string>
     <string name="menu_cancelItem">Cancel</string>
     <string name="enter_item_title"> Please enter an Item Title </string>
     <string name="save_item"> Save Item </string>

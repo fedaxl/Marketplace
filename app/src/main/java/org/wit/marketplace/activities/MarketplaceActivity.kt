@@ -20,6 +20,8 @@ import timber.log.Timber.i
 
 class MarketplaceActivity : AppCompatActivity() {
 
+    var edit = false;
+
     private lateinit var binding: ActivityMarketplaceBinding
     var marketItem = MarketplaceModel()
     lateinit var app : MainApp
@@ -96,11 +98,16 @@ class MarketplaceActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_marketplace, menu)
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                app.marketItems.delete(marketItem)
+                finish()
+            }
             R.id.item_cancel -> { finish() }
         }
         return super.onOptionsItemSelected(item)

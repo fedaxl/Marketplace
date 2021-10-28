@@ -43,9 +43,7 @@ class MarketplaceMemStore : MarketplaceStore {
         }
 
         override fun delete(marketItem: MarketplaceModel) {
-            marketItem.id = getId()
             marketItems.remove(marketItem)
-            logAll()
         }
 
         private fun logAll() {
