@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_margin="8dp"
-                    android:autofillHints="false"
+                    android:autofillHints=""
                     android:hint="@string/hint_itemTitle"
                     android:inputType="text"
                     android:maxLength="25"
@@ -59,8 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:autofillHints="false"
                     android:hint="@string/hint_itemDescription"
+                    android:autofillHints=""
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
@@ -74,17 +74,17 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
                     android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:text="@string/button_addImage"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/item_image"
+                    android:id="@+id/itemImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"/>
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <Button
                     android:id="@+id/btnAdd"

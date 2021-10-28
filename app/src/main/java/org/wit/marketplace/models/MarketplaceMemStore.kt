@@ -18,6 +18,11 @@ class MarketplaceMemStore : MarketplaceStore {
             return marketItems
         }
 
+        /*override fun findById(id:Long) : MarketplaceModel? {
+        val foundMarketItem: MarketplaceModel? = marketItems.find { it.id == id }
+        return foundMarketItem
+        }*/
+
         override fun create(marketItem: MarketplaceModel) {
             marketItem.id = getId()
             marketItems.add(marketItem)

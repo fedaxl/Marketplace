@@ -21,11 +21,13 @@ class MarketplaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMarketplaceBinding
     var marketItem = MarketplaceModel()
     lateinit var app : MainApp
-    var edit = false
+
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var edit = false
 
         binding = ActivityMarketplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,6 +43,9 @@ class MarketplaceActivity : AppCompatActivity() {
             binding.itemTitle.setText(marketItem.title)
             binding.description.setText(marketItem.description)
             binding.btnAdd.setText(R.string.save_item)
+            Picasso.get()
+                .load(marketItem.image)
+                .into(binding.itemImage)
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -48,7 +53,7 @@ class MarketplaceActivity : AppCompatActivity() {
             marketItem.description = binding.description.text.toString()
 
             if (marketItem.title.isNotEmpty()) {
-                Snackbar.make(it,R.string.enter_item_title, Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.enter_item_title, Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
@@ -57,6 +62,7 @@ class MarketplaceActivity : AppCompatActivity() {
                     app.marketItems.create(marketItem.copy())
                 }
             }
+            i("add Button Pressed: $marketItem")
             setResult(RESULT_OK)
             finish()
         }
@@ -64,6 +70,7 @@ class MarketplaceActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+        registerImagePickerCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
