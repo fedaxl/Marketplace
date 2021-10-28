@@ -17,6 +17,7 @@ class MarketplaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMarketplaceBinding
     var marketItem = MarketplaceModel()
     lateinit var app : MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +31,11 @@ class MarketplaceActivity : AppCompatActivity() {
         app = application as MainApp
 
         if (intent.hasExtra("item_edit")) {
+            edit = true
             marketItem = intent.extras?.getParcelable("item_edit")!!
             binding.itemTitle.setText(marketItem.title)
             binding.description.setText(marketItem.description)
+            binding.btnAdd.setText(R.string.save_item)
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -40,15 +43,21 @@ class MarketplaceActivity : AppCompatActivity() {
             marketItem.description = binding.description.text.toString()
 
             if (marketItem.title.isNotEmpty()) {
-                app.marketItems.create((marketItem.copy()))
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
-                Snackbar
-                    .make(it,R.string.enter_item_title, Snackbar.LENGTH_LONG)
+                Snackbar.make(it,R.string.enter_item_title, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.marketItems.update(marketItem.copy())
+                } else {
+                    app.marketItems.create(marketItem.copy())
+                }
             }
+            setResult(RESULT_OK)
+            finish()
+        }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
         }
     }
 

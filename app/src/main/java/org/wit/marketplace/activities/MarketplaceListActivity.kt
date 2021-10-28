@@ -51,5 +51,11 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
         launcherIntent.putExtra("item_edit", marketItem)
         startActivityForResult(launcherIntent,0)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
 
