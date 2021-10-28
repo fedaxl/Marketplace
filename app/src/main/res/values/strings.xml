@@ -17,10 +17,10 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">login</string>
-    <string name="new_account">new_account</string>
-    <string name="click_here">click_here</string>
+    <string name="new_account">Are you new to Marketplace?</string>
+    <string name="click_here">Sign up here!</string>
     <string name="sign_up">sign_up</string>
-    <string name="confirmpass">confirmpass</string>
+    <string name="confirmpass">confirm password</string>
     <string name="signup">signup</string>
-    <string name="already_have_an_account">already_have_an_account</string>
+    <string name="already_have_an_account">Do you already have an account?</string>
 </resources>
