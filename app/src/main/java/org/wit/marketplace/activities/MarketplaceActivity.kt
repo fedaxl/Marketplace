@@ -26,7 +26,7 @@ class MarketplaceActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     val IMAGE_REQUEST = 1
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 15f)
+    //var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +79,12 @@ class MarketplaceActivity : AppCompatActivity() {
         }
 
         binding.itemLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (marketItem.zoom != 0f) {
+                location.lat =  marketItem.lat
+                location.lng = marketItem.lng
+                location.zoom = marketItem.zoom
+            }
             val launcherIntent = Intent(this, MapsActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -128,8 +134,11 @@ class MarketplaceActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                            marketItem.lat = location.lat
+                            marketItem.lng = location.lng
+                            marketItem.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

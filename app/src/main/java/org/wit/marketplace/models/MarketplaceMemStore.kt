@@ -35,6 +35,9 @@ class MarketplaceMemStore : MarketplaceStore {
             foundMarketItem.title = marketItem.title
             foundMarketItem.description = marketItem.description
             foundMarketItem.image = marketItem.image
+            foundMarketItem.lat = marketItem.lat
+            foundMarketItem.lng = marketItem.lng
+            foundMarketItem.zoom = marketItem.zoom
             logAll()
             }
         }

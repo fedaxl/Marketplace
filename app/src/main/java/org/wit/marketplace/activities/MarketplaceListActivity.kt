@@ -31,7 +31,8 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = MarketplaceAdapter(app.marketItems.findAll(), this)
+        //binding.recyclerView.adapter = MarketplaceAdapter(app.marketItems.findAll(), this)
+        loadMarketitems()
 
         registerRefreshCallback()
     }
@@ -65,7 +66,18 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            //{ binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadMarketitems()}
+    }
+
+
+    private fun loadMarketitems() {
+        showMarketitems(app.marketItems.findAll())
+    }
+
+    fun showMarketitems (marketItems: List<MarketplaceModel>) {
+        binding.recyclerView.adapter = MarketplaceAdapter(marketItems, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }

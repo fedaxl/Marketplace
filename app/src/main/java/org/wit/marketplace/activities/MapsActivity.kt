@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.marketplace.R
 import org.wit.marketplace.models.Location
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()
@@ -39,6 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             .draggable(true)
             .position(loc)
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
@@ -53,6 +54,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS : $loc"
+        return false
     }
 
     override fun onBackPressed() {
