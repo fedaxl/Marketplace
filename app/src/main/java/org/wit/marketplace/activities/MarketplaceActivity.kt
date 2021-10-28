@@ -1,6 +1,7 @@
 package org.wit.marketplace.activities
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -21,8 +22,8 @@ class MarketplaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMarketplaceBinding
     var marketItem = MarketplaceModel()
     lateinit var app : MainApp
-
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +32,12 @@ class MarketplaceActivity : AppCompatActivity() {
 
         binding = ActivityMarketplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
+
+        i("Marketplace Activity started...")
 
         if (intent.hasExtra("item_edit")) {
             edit = true
@@ -46,6 +48,9 @@ class MarketplaceActivity : AppCompatActivity() {
             Picasso.get()
                 .load(marketItem.image)
                 .into(binding.itemImage)
+            if (marketItem.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_item_image)
+            }
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -66,7 +71,6 @@ class MarketplaceActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
-
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
@@ -97,6 +101,7 @@ class MarketplaceActivity : AppCompatActivity() {
                             Picasso.get()
                                 .load(marketItem.image)
                                 .into(binding.itemImage)
+                            binding.chooseImage.setText(R.string.change_item_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.marketplace.R
 import org.wit.marketplace.adapters.MarketplaceAdapter
@@ -16,6 +18,7 @@ import org.wit.marketplace.models.MarketplaceModel
 class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityMarketplaceListBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,8 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = MarketplaceAdapter(app.marketItems.findAll(), this)
+
+        registerRefreshCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -40,7 +45,7 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, MarketplaceActivity::class.java)
-                startActivityForResult(launcherIntent,0)
+                refreshIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -49,12 +54,18 @@ class MarketplaceListActivity : AppCompatActivity(), MarketplaceListener {
     override fun onMarketplaceClick(marketItem: MarketplaceModel) {
         val launcherIntent = Intent(this, MarketplaceActivity::class.java)
         launcherIntent.putExtra("item_edit", marketItem)
-        startActivityForResult(launcherIntent,0)
+        refreshIntentLauncher.launch(launcherIntent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         binding.recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
+    }*/
+
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { binding.recyclerView.adapter?.notifyDataSetChanged() }
     }
 
 }

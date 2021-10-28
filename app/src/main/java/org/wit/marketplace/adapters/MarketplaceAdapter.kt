@@ -3,6 +3,7 @@ package org.wit.marketplace.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.marketplace.databinding.CardMarketplaceBinding
 import org.wit.marketplace.models.MarketplaceModel
 
@@ -35,8 +36,8 @@ class MarketplaceAdapter constructor(
         fun bind(marketItem: MarketplaceModel, listener: MarketplaceListener) {
             binding.itemTitle.text = marketItem.title
             binding.description.text = marketItem.description
-            binding.root.setOnClickListener { listener.onMarketplaceClick(marketItem)
+            Picasso.get().load(marketItem.image).resize(200,200).into(binding.imageIcon)
+            binding.root.setOnClickListener { listener.onMarketplaceClick(marketItem)}
             }
     }
 }
-    }

@@ -3,7 +3,7 @@ package org.wit.marketplace.models
 import mu.KotlinLogging
 import timber.log.Timber.i
 
-private val logger = KotlinLogging.logger {}
+//private val logger = KotlinLogging.logger {}
     var lastId = 0L
 
     internal fun getId(): Long {
@@ -34,8 +34,9 @@ class MarketplaceMemStore : MarketplaceStore {
         if (foundMarketItem != null) {
             foundMarketItem.title = marketItem.title
             foundMarketItem.description = marketItem.description
+            foundMarketItem.image = marketItem.image
             logAll()
-        }
+            }
         }
 
         override fun delete(marketItem: MarketplaceModel) {
@@ -45,6 +46,6 @@ class MarketplaceMemStore : MarketplaceStore {
         }
 
         private fun logAll() {
-            marketItems.forEach { logger.info("${it}") }
+            marketItems.forEach { i("$it") }
         }
     }
