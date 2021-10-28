@@ -46,6 +46,11 @@ class MarketplaceMemStore : MarketplaceStore {
             marketItems.remove(marketItem)
         }
 
+        /*override fun findById(id:Long) : MarketplaceModel? {
+            val foundMarketItem: MarketplaceModel? = marketItems.find { it.id == id }
+            return foundMarketItem
+        }*/
+
         private fun logAll() {
             marketItems.forEach { i("$it") }
         }
