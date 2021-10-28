@@ -5,4 +5,5 @@ interface MarketplaceStore {
     //fun findOne(id: Long): MarketplaceModel?
     fun create(marketItem: MarketplaceModel)
     fun update(marketItem: MarketplaceModel)
+    fun delete(marketItem: MarketplaceModel)
 }

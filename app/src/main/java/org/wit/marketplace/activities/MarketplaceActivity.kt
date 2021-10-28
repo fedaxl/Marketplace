@@ -46,7 +46,7 @@ class MarketplaceActivity : AppCompatActivity() {
             }
             else {
                 Snackbar
-                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                    .make(it,R.string.enter_item_title, Snackbar.LENGTH_LONG)
                     .show()
             }
         }

@@ -27,5 +27,16 @@
             android:layout_below="@id/itemTitle"
             tools:text="A Description" />
 
+        <Button
+            android:id="@+id/menu_removeItem"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="132dp"
+            android:layout_marginEnd="17dp"
+            android:layout_toEndOf="@+id/itemTitle"
+            android:text="Remove"
+            android:textColorHighlight="@color/teal_700" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
