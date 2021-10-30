@@ -34,6 +34,7 @@ class MarketplaceMemStore : MarketplaceStore {
         if (foundMarketItem != null) {
             foundMarketItem.title = marketItem.title
             foundMarketItem.description = marketItem.description
+            foundMarketItem.price = marketItem.price
             foundMarketItem.image = marketItem.image
             foundMarketItem.lat = marketItem.lat
             foundMarketItem.lng = marketItem.lng

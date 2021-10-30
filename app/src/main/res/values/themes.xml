@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Marketplace" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#EF9A9A</item>
-        <item name="colorPrimaryVariant">#F87E7B</item>
+        <item name="colorPrimary">#ffa270</item>
+        <item name="colorPrimaryVariant">#c63f17</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#4D51FB</item>

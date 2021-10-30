@@ -50,6 +50,7 @@ class MarketplaceActivity : AppCompatActivity() {
             marketItem = intent.extras?.getParcelable("item_edit")!!
             binding.itemTitle.setText(marketItem.title)
             binding.description.setText(marketItem.description)
+            binding.price.setText(marketItem.price)
             binding.btnAdd.setText(R.string.save_item)
             Picasso.get()
                 .load(marketItem.image)
@@ -62,6 +63,7 @@ class MarketplaceActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             marketItem.title = binding.itemTitle.text.toString()
             marketItem.description = binding.description.text.toString()
+            marketItem.price = binding.price.text.toString()
 
             if (marketItem.title.isEmpty()) {
                 Snackbar.make(it, R.string.enter_item_title, Snackbar.LENGTH_LONG)

@@ -47,6 +47,7 @@ class MarketplaceJSONStore (private val context: Context) : MarketplaceStore {
         if (foundMarketitem != null) {
             foundMarketitem.title = marketItem.title
             foundMarketitem.description = marketItem.description
+            foundMarketitem.price = marketItem.price
             foundMarketitem.image = marketItem.image
             foundMarketitem.lat = marketItem.lat
             foundMarketitem.lng = marketItem.lng
